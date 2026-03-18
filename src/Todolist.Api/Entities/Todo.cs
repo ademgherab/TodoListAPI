@@ -5,6 +5,8 @@ namespace Todolist.Api.Entities;
 public class Todo
 {
     public Guid Id { get; set; }
+    public string OwnerId { get; set; } = string.Empty;
+    public ApplicationUser Owner { get; set; } = default!;
     public string Title { get; set; } = string.Empty;
     public string? Description { get; set; }
     public TodoPriority Priority { get; set; }

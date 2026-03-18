@@ -3,10 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Todolist.Api.Middlewares;
 
-public class GlobalExceptionHandler(IProblemDetailsService problemDetailsService) : IExceptionHandler
+public class GlobalExceptionHandler(IProblemDetailsService problemDetailsService)
+    : IExceptionHandler
 {
-    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception,
-        CancellationToken cancellationToken)
+    public async ValueTask<bool> TryHandleAsync(
+        HttpContext httpContext,
+        Exception exception,
+        CancellationToken cancellationToken
+    )
     {
         var context = new ProblemDetailsContext
         {
@@ -14,8 +18,9 @@ public class GlobalExceptionHandler(IProblemDetailsService problemDetailsService
             Exception = exception,
             ProblemDetails = new ProblemDetails
             {
-                Detail = "Internal Server Error.", Status = StatusCodes.Status500InternalServerError,
-            }
+                Detail = "Internal Server Error.",
+                Status = StatusCodes.Status500InternalServerError,
+            },
         };
         await problemDetailsService.TryWriteAsync(context);
         return true;

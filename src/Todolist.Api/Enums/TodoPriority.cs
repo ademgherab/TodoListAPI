@@ -4,5 +4,5 @@ public enum TodoPriority
 {
     Low,
     Medium,
-    High
+    High,
 }
